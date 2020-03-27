@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<img src="" alt="">-->
+<!--<p id="game"></p>-->
+<canvas id ='game' width="600" height="450" style="background-color: cadetblue; position: absolute"></canvas>
+<!--<img src="this.img" width="this.size" height="this.size" style="top: this.top; left: this.left ; position: relative" alt="Car">-->
+
+<script>
+    let DriveACar = function driveCar(img, top,left,size) {
+        this.img = img;
+        this.top = top;
+        this.left = left;
+        this.size = size;
+        this.car = function () {
+            return'<img src="'+this.img+'" width="'+this.size
+                +'" height="'+this.size+'" style="top: '+this.top
+                +'px; left: '+this.left+'px ; position: relative" alt="Car">'
+        }
+        this.setLeft = function () {
+            this.left = 0
+            return this.left
+        }
+        this.turnRight = function () {
+            this.left +=100;
+            return this.left
+        }
+        this.turnLeft = function () {
+            this.left-=100;
+            return this.left
+        }
+        // this.turnDown = function() {
+        //     this.top +=100
+        // }
+        // this.turnUp = function () {
+        //     this.top -=100;
+        // }
+
+    }
+    let driveACar = new DriveACar('https://i.imgur.com/59T4v6t.png',20,30,100)
+    function startGame (){
+                if (driveACar.left + driveACar.size < window.innerWidth) {
+                    driveACar.turnRight();
+                } else driveACar.setLeft()
+
+        document.getElementById("game").getContext('2d').drawImage('https://i.imgur.com/59T4v6t.png',0,0)
+        setTimeout(startGame, 500)
+        }
+    startGame()
+</script>
+</body>
+</html>
