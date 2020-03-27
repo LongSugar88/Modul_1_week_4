@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            cellspacing: 0;
+            cellpadding"4px"
+        }
+        tr,td {
+            width: 40px;
+            height: 40px;
+        }
+    </style>
+    <script src="checkConditionCaroGames.js"></script>
+</head>
+<body>
+<div id ='gameCaro'></div>
+<script>
+    let BoardCaro = function (cel,colum) {
+        this.cell = cel
+        this.colum = colum
+        this.drawCell = function(){
+            this.board = '<table border="1" >'
+            for (let i=0; i<this.cell; i++){
+                this.board+= ' <tr align="center">'
+                for (j=0; j<this.colum;j++){
+                    this.board+= '<td id = "'+i+j+'" onclick=player("'+i+j+'"'+')></td>'
+                }
+                this.board+='</tr>'
+            }
+            this.board+='</table>'
+            document.getElementById('gameCaro').innerHTML=this.board
+        }
+    }
+    const CARO_ROW = 10;
+    const CARO_COLUMN = 10;
+    let boardCaro = new BoardCaro(CARO_ROW,CARO_COLUMN);
+    boardCaro.drawCell()
+
+    let checkBoard= []
+    for (let i=0; i<CARO_ROW;i++){
+        checkBoard[i]=[]
+        for (let j=0; j<CARO_COLUMN;j++){
+            checkBoard[i][j]='2'
+        }
+    }
+    console.log(checkBoard)
+    let turn = 1;
+    function player(cell) {
+        if(turn === 1){
+            document.getElementById(cell).innerHTML = 'X';
+            let a = cell.toString();
+            checkBoard[a[0]][a[1]] = 'X'
+            turn++
+            unitedWeStand_Colum()
+            unitedWeStand_Row()
+            unitedWeStand_Colum()
+            unitedWeStand_Cross2()
+
+        } else{
+            if(turn === 2){
+                document.getElementById(cell).innerHTML = 'O';
+                let a = cell.toString();;
+                checkBoard[a[0]][a[1]] = 'O'
+                turn--
+                unitedWeStand_Colum()
+                unitedWeStand_Row()
+                unitedWeStand_Colum()
+                unitedWeStand_Cross2()
+
+            }
+        }
+    }
+
+
+</script>
+</body>
+</html>
